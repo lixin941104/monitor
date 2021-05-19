@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+ 
+    <title>微信页面监控</title>
+</head>
+<body>
+    <div id="mydiv">
+        <button id="btn" style="width:772px;height:734px">点击</button>
+    </div>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+ 
+<script type="text/javascript">
+ 
+ 
+    $(function(){
+        var a=170;
+        $("#btn").click(function(){
+            var b = "";
+            $.ajax({
+             //   async : true,
+                //url : "http://10.173.123.18:8080/comment/manage?article_uid=330947329",
+                url : "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517&callback=_boxjsonpf8d9a6f1"+"&appid="+a,
+                //data : "appid="+a,
+                type : "GET",
+                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+                jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+                jsonpCallback: "callback",
+                async : false,
+                success: function(data){
+                    //console.info(data);
+					if(null != data && "" != data){
+                            console.log(data);
+                            b = data["errno"];
+                            a = a+1;
+                            d = "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517"
+                            $.ajax({
+                                async : false,
+                                url : d,
+                                type : "GET",
+                                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+                                jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+                                success: function(data){
+			  		            console.info(data);
+                                }
+                            });
+                    } else {
+                            a = a;
+                    }
+                }
+            });   
+        });
+        return a
+    });
+</script>
+</html>
