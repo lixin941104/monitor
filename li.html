@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
  
-    <title>jQuery实现JSONP</title>
+    <title>微信页面监控</title>
 </head>
 <body>
     <div id="mydiv">
-        <button id="btn">点击</button>
+        <button id="btn" style="width:1000px;height:1700px">点击</button>
     </div>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -17,13 +17,13 @@
  
  
     $(function(){
-        var a=170;
+        var a=1;
         $("#btn").click(function(){
             var b = "";
             $.ajax({
              //   async : true,
                 //url : "http://10.173.123.18:8080/comment/manage?article_uid=330947329",
-                url : "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517&callback=_boxjsonpf8d9a6f1"+"&appid="+a,
+                url : "http://jmz.bcc-szth.baidu.com:8788/chk_domain/?p_num=1234&step="+a,
                 //data : "appid="+a,
                 type : "GET",
                 dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
@@ -34,15 +34,16 @@
                     //console.info(data);
 					if(null != data && "" != data){
                             console.log(data);
-                            b = data["errno"];
+                            b = data["url"];
                             a = a+1;
-                            d = "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517"
+                            //d = "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517"
                             $.ajax({
                                 async : false,
-                                url : d,
+                                url : "http://jmz.bcc-szth.baidu.com:8788/chk_domain_idx/",
+                                //url : b,
                                 type : "GET",
-                                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
-                                jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+                                //dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+                                //jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
                                 success: function(data){
 			  		            console.info(data);
                                 }
