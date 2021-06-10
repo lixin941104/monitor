@@ -22,8 +22,8 @@
             var b = "";
             $.ajax({
              //   async : true,
-                //url : "http://10.173.123.18:8080/comment/manage?article_uid=330947329",
-                url : "http://jmz.bcc-szth.baidu.com:8788/chk_domain/?p_num=1234&step="+a,
+                url : "http://10.201.29.19:8871/chk_domain/?p_num=1234&step="+a,
+                //url : "https://mr.baidu.com/chk_domain/?p_num=1234&step="+a,
                 //data : "appid="+a,
                 type : "GET",
                 dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
@@ -35,14 +35,15 @@
 					if(null != data && "" != data){
                             console.log(data);
                             b = data["url"];
+                            console.info(b);
                             a = a+1;
                             //d = "https://ext.baidu.com/api/vote/v1/vote/getnidvote?source=baidumedia&nid=news_8889011877815101517"
                             $.ajax({
                                 async : false,
-                                url : "http://jmz.bcc-szth.baidu.com:8788/chk_domain_idx/",
-                                //url : b,
+                                url : "http://10.201.29.19:8871/chk_domain_idx/",
+                                //url : "https://"+b,
                                 type : "GET",
-                                //dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+                                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
                                 //jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
                                 success: function(data){
 			  		            console.info(data);
